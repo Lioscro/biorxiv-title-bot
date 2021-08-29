@@ -1,0 +1,31 @@
+name: Tweet
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  test-generate:
+    name: Test generation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+      - name: Setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+          architecture: x64
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Download model
+        env:
+          MODEL_URL: ${{ secrets.MODEL_URL }}
+        run: make download
+      - name: Generate
+        env:
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
+        run: make tweet

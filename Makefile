@@ -24,3 +24,6 @@ download:
 
 generate:
 	$(PYTHON) scripts/generate.py data model
+
+tweet:
+	$(PYTHON) scripts/tweet.py data model

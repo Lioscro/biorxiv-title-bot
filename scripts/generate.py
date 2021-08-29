@@ -23,6 +23,21 @@ def generate(model, tokenizer, category=None, seed=None):
     )
     return tokenizer.decode(samples[0], skip_special_tokens=True)
 
+def decode(generated):
+    prefix = '<|title|>'
+    generated = generated[len(prefix):]
+    category = None
+    if '<|' in generated and '|>' in generated:
+        assert generated[:2] == '<|'
+
+        i = generated.find('|>')+2
+        category = generated[:i][2:-2]
+        generated = generated[i:]
+    return category, generated
+
+def generate_and_decode(model, tokenizer, category=None, seed=None):
+    generated = generate(model, tokenizer, category, seed)
+    return decode(generated)
 
 if __name__ == '__main__':
     import argparse
