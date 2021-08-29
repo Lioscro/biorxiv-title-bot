@@ -12,7 +12,9 @@ ACCESS_KEY = os.environ.get('ACCESS_KEY')
 ACCESS_SECRET = os.environ.get('ACCESS_SECRET')
 
 def format_tweet(tags, generated):
-    return f'{generated} {tags}' if category else generated
+    # Tags aren't working great right now turn off.
+    # return f'{generated} {tags}' if category else generated
+    return generated
 
 def authenticate(consumer_key, consumer_secret, access_key, access_secret):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)

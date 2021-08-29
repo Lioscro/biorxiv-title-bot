@@ -132,3 +132,4 @@ data/*.json
 data/eval.txt
 data/train.txt
 model
+model.tar.gz
