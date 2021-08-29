@@ -20,7 +20,7 @@ train:
 
 download:
 	mkdir -p model
-	wget $(MODEL_URL) -O- | tar -xvzf - -C model
+	wget $(MODEL_URL) -qO- | tar -xvzf - -C model
 
 generate:
 	$(PYTHON) scripts/generate.py data model
