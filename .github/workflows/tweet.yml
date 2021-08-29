@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-generate:
-    name: Test generation
+  tweet:
+    name: Tweet
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch

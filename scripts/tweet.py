@@ -63,4 +63,3 @@ if __name__ == '__main__':
             )
             tweet = format_tweet(tags.get(category), generated)
             api.update_status(tweet)
-            break
