@@ -1,4 +1,5 @@
 import os
+import random
 
 import tweepy
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
@@ -50,16 +51,13 @@ if __name__ == '__main__':
 
     model = GPT2LMHeadModel.from_pretrained(model_dir)
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+
+    category = category or random.choice(categories)
+    category, generated = generate_and_decode(
+        model, tokenizer, category, seed
+    )
+    tweet = format_tweet(tags.get(category), generated)
     if tweet_id:
-        category, generated = generate_and_decode(
-            model, tokenizer, category, seed
-        )
-        tweet = format_tweet(tags.get(category), generated)
         api.update_status(tweet, in_reply_to_status_id=tweet_id)
     else:
-        for category in categories:
-            category, generated = generate_and_decode(
-                model, tokenizer, category, seed
-            )
-            tweet = format_tweet(tags.get(category), generated)
-            api.update_status(tweet)
+        api.update_status(tweet)
