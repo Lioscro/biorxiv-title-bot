@@ -1,0 +1,15 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: biorxiv-title-bot:latest
