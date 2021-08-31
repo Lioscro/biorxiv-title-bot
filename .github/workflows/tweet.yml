@@ -9,7 +9,7 @@ jobs:
   tweet:
     name: Tweet
     runs-on: ubuntu-latest
-    container: lioscro/biorxiv-title-bot:latest
+    container: ghcr.io/lioscro/biorxiv-title-bot:latest
     steps:
       - name: Checkout branch
         uses: actions/checkout@master
