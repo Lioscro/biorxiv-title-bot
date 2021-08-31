@@ -18,7 +18,7 @@ jobs:
         run: pip install -r requirements.txt
       - name: Download model
         env:
-          MODEL_URL: ${{ secrets.MODEL_URL }}
+          MODEL_URL: '${{ secrets.MODEL_URL }}'
         run: make download
       - name: Generate
         run: make generate
