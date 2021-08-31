@@ -9,7 +9,7 @@ combine: data/_*.json
 	$(PYTHON) scripts/combine.py data
 
 prepare: data/papers.json
-	$(PYTHON) scripts/prepare.py data/papers.json data 0.9
+	$(PYTHON) scripts/prepare.py data/papers.json data 0.95
 
 train:
 	$(PYTHON) scripts/train.py --model_type gpt2 --model_name_or_path gpt2 \
