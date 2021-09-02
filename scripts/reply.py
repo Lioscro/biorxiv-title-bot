@@ -18,7 +18,7 @@ ACCESS_SECRET = os.environ.get('ACCESS_SECRET')
 
 def parse_tweet(tweet):
     # split by space
-    split = tweet.split(' ')
+    split = tweet.strip().split(' ')
 
     # parse
     category = None
