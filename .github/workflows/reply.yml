@@ -17,7 +17,7 @@ jobs:
         env:
           MODEL_URL: ${{ secrets.MODEL_URL }}
         run: make download
-      - name: Generate
+      - name: Reply
         env:
           CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
           CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
