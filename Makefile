@@ -27,3 +27,6 @@ generate:
 
 tweet:
 	$(PYTHON) scripts/tweet.py data model
+
+reply:
+	$(PYTHON) scripts/reply.py data model

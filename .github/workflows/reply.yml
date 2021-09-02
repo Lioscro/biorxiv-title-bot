@@ -1,0 +1,26 @@
+name: Reply
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  reply:
+    name: Reply
+    runs-on: ubuntu-latest
+    container: ghcr.io/lioscro/biorxiv-title-bot:latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@master
+      - name: Download model
+        env:
+          MODEL_URL: ${{ secrets.MODEL_URL }}
+        run: make download
+      - name: Generate
+        env:
+          CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
+          CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+          ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
+        run: make reply
