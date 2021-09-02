@@ -48,8 +48,10 @@ def fetch_mentions(api):
     done = False
     while not done:
         mentions = api.mentions_timeline(max_id=max_id, count=count)
+        # Fetch mentions that were made after the last reply, and ignore
+        # any replies.
         for mention in mentions:
-            if mention.created_at >= last_tweet_datetime:
+            if mention.created_at >= last_tweet_datetime and mention.in_reply_to_status_id is None:
                 fetched.append(mention)
             else:
                 done = True
