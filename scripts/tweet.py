@@ -14,6 +14,7 @@ ACCESS_SECRET = os.environ.get('ACCESS_SECRET')
 def format_tweet(tags, generated):
     # Tags aren't working great right now turn off.
     # return f'{generated} {tags}' if category else generated
+    print(generated)
     return generated
 
 def authenticate(consumer_key, consumer_secret, access_key, access_secret):
