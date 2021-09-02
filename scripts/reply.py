@@ -33,7 +33,7 @@ def parse_tweet(tweet):
 
     # if tweet contains brackets, but category couldn't be parsed,
     # raise exception
-    if '[' in tweet or ']' in tweet and category is None:
+    if ('[' in tweet or ']' in tweet) and category is None:
         raise Exception('Failed to parse category.')
 
     return category, ' '.join(seed_words)
@@ -43,19 +43,19 @@ def fetch_mentions(api):
     last_tweet_datetime = api.user_timeline(count=1)[0].created_at
 
     fetched = []
+    count = 20
     max_id = None
     done = False
     while not done:
-        mentions = api.mentions_timeline(max_id=max_id)
-        if len(mentions) == 0:
-            break
-
+        mentions = api.mentions_timeline(max_id=max_id, count=count)
         for mention in mentions:
             if mention.created_at >= last_tweet_datetime:
                 fetched.append(mention)
             else:
                 done = True
                 break
+        if len(mentions) < count:
+            break
         max_id = str(mentions[-1].id - 1)
 
     return fetched
@@ -97,4 +97,11 @@ if __name__ == '__main__':
                 'https://github.com/Lioscro/biorxiv-title-bot/blob/main/data/categories.txt '
                 'for category options.'
             )
-        api.update_status(reply, in_reply_to_status_id=mention.id_str)
+        try:
+            api.update_status(
+                reply,
+                in_reply_to_status_id=mention.id_str,
+                auto_populate_reply_metadata=True,
+            )
+        except:
+            pass

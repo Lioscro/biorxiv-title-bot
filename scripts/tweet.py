@@ -61,6 +61,10 @@ if __name__ == '__main__':
     )
     tweet = format_tweet(tags.get(category), generated)
     if tweet_id:
-        api.update_status(tweet, in_reply_to_status_id=tweet_id)
+        api.update_status(
+            tweet,
+            in_reply_to_status_id=tweet_id,
+            auto_populate_reply_metadata=True,
+        )
     else:
         api.update_status(tweet)
