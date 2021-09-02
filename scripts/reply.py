@@ -47,6 +47,9 @@ def fetch_mentions(api):
     done = False
     while not done:
         mentions = api.mentions_timeline(max_id=max_id)
+        if len(mentions) == 0:
+            break
+
         for mention in mentions:
             if mention.created_at >= last_tweet_datetime:
                 fetched.append(mention)
